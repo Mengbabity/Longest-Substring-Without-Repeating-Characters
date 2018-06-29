@@ -12,13 +12,16 @@ public:
 		if (n == 0)
 			return 0;
 		int res = 1;
-		int mid = 0;
+		int mid = 0; 
+		int vn = 0;
 		map<char, int> m;
+		map<char, vector<int>> mtmp;
 		int i = 0;
 
 		while (i<n)
 		{
 			m[s[i]]++;
+			mtmp[s[i]].push_back(i);
 			if (m[s[i]]>1)
 			{
 				int tmp = 0;
@@ -26,6 +29,8 @@ public:
 					tmp += e.second;
 				res = max(tmp - 1, res);
 				m.clear();
+				vn = mtmp[s[i]].size();
+				i = mtmp[s[i]][vn-2] + 1;
 				m[s[i]]++;
 			}
 			i++;
@@ -44,5 +49,5 @@ public:
 void main()
 {
 	Solution s;
-	s.lengthOfLongestSubstring("dvdf");
+	s.lengthOfLongestSubstring("abcabcbb");
 }
